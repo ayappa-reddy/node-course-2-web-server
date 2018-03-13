@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 let app = express();
 
 // Node uses a wrapper function to wrap the whole module code.
@@ -26,11 +27,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    res.render('maintenance.hbs');
-    // next() is omitted, so only maintenance.hbs is displayed
-    // and all other template handlers defined below are never executed.
-});
+// app.use((req, res, next) => {
+//     res.render('maintenance.hbs');
+//     // next() is omitted, so only maintenance.hbs is displayed
+//     // and all other template handlers defined below are never executed.
+// });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -71,6 +72,6 @@ app.get('/bad', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000')
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`);
 });
